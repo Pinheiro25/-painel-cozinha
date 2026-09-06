@@ -55,13 +55,13 @@ button:active,.color:active{transform:scale(.97);opacity:.82}
         <h1>💡 Luz do Closet</h1>
         <div id="status">B3 e B4 prontas</div>
         <div class="powerRow">
-          <button class="power on" onclick="command('on')">LIGAR</button>
-          <button class="power off" onclick="command('off')">DESLIGAR</button>
+          <button class="power on" onclick="window.sendTuya('on')">LIGAR</button>
+          <button class="power off" onclick="window.sendTuya('off')">DESLIGAR</button>
         </div>
-        <button class="mode white" onclick="command('white')">☀️ BRANCO</button>
-        <button class="mode colour" onclick="command('color','&h=240&s=900&v=900')">🎨 COLORIDO</button>
+        <button class="mode white" onclick="window.sendTuya('white')">☀️ BRANCO</button>
+        <button class="mode colour" onclick="window.sendTuya('color','&h=240&s=900&v=900')">🎨 COLORIDO</button>
         <div class="label">Brilho</div>
-        <input id="brightness" type="range" min="10" max="1000" step="10" value="800" onchange="setBrightness(this.value)">
+        <input id="brightness" type="range" min="10" max="1000" step="10" value="800" onchange="window.setBrightness(this.value)">
         <div id="brightValue" class="value">80%</div>
       </div>
     </div>
@@ -71,16 +71,16 @@ button:active,.color:active{transform:scale(.97);opacity:.82}
         <h1>Cores rápidas</h1>
         <div class="colors">
           <div class="colorRow">
-            <button class="color red" aria-label="Vermelho" onclick="setColor(0)"></button>
-            <button class="color amber" aria-label="Âmbar" onclick="setColor(35)"></button>
+            <button class="color red" aria-label="Vermelho" onclick="window.setColor(0)"></button>
+            <button class="color amber" aria-label="Âmbar" onclick="window.setColor(35)"></button>
           </div>
           <div class="colorRow">
-            <button class="color green" aria-label="Verde" onclick="setColor(125)"></button>
-            <button class="color blue" aria-label="Azul" onclick="setColor(220)"></button>
+            <button class="color green" aria-label="Verde" onclick="window.setColor(125)"></button>
+            <button class="color blue" aria-label="Azul" onclick="window.setColor(220)"></button>
           </div>
           <div class="colorRow">
-            <button class="color purple" aria-label="Roxo" onclick="setColor(275)"></button>
-            <button class="color pink" aria-label="Rosa" onclick="setColor(325)"></button>
+            <button class="color purple" aria-label="Roxo" onclick="window.setColor(275)"></button>
+            <button class="color pink" aria-label="Rosa" onclick="window.setColor(325)"></button>
           </div>
         </div>
         <div class="sub" style="text-align:center;margin-top:8px">Toque em uma cor para aplicar nas duas lâmpadas</div>
@@ -102,9 +102,9 @@ button:active,.color:active{transform:scale(.97);opacity:.82}
   function weatherText(c){if(c===0)return['☀️','Céu limpo'];if(c<=2)return['🌤️','Poucas nuvens'];if(c===3)return['☁️','Nublado'];if(c>=51&&c<=82)return['🌧️','Chuva'];if(c>=95)return['⛈️','Trovoadas'];return['🌤️','Tempo em Votorantim']}
   function loadWeather(){var x=new XMLHttpRequest(),u='https://api.open-meteo.com/v1/forecast?latitude=-23.54&longitude=-47.45&current_weather=true&timezone=America%2FSao_Paulo&_='+new Date().getTime();x.onreadystatechange=function(){if(x.readyState===4&&x.status>=200&&x.status<300){try{var w=JSON.parse(x.responseText).current_weather,d=weatherText(Number(w.weathercode));document.getElementById('weather').innerHTML=d[0]+' '+Math.round(w.temperature)+'°C';document.getElementById('weatherExtra').innerHTML=d[1]+' · vento '+Math.round(w.windspeed)+' km/h'}catch(e){}}};x.open('GET',u,true);x.send()}
   loadWeather();setInterval(loadWeather,10*60*1000);
-  window.command=function(action,extra){var n=++requestNumber,cb='tuyaCallback'+n,s=document.createElement('script');show('Enviando…');window[cb]=function(data){show(data&&data.ok?'Pronto':'Não foi possível concluir');document.getElementById('status').innerHTML=data&&data.ok?'Comando enviado para B3 e B4':'Verifique a conexão';try{delete window[cb]}catch(e){window[cb]=null}if(s.parentNode)s.parentNode.removeChild(s)};s.src=API+'?action='+encodeURIComponent(action)+(extra||'')+'&callback='+cb+'&_='+new Date().getTime();s.onerror=function(){show('Sem conexão com o controle')};document.body.appendChild(s)};
-  window.setColor=function(h){command('color','&h='+h+'&s=1000&v=900')};
-  window.setBrightness=function(v){document.getElementById('brightValue').innerHTML=Math.round(Number(v)/10)+'%';command('brightness','&value='+v)};
+  window.sendTuya=function(action,extra){var n=++requestNumber,cb='tuyaCallback'+n,s=document.createElement('script');show('Enviando…');window[cb]=function(data){show(data&&data.ok?'Pronto':'Não foi possível concluir');document.getElementById('status').innerHTML=data&&data.ok?'Comando enviado para B3 e B4':'Verifique a conexão';try{delete window[cb]}catch(e){window[cb]=null}if(s.parentNode)s.parentNode.removeChild(s)};s.src=API+'?action='+encodeURIComponent(action)+(extra||'')+'&callback='+cb+'&_='+new Date().getTime();s.onerror=function(){show('Sem conexão com o controle')};document.body.appendChild(s)};
+  window.setColor=function(h){window.sendTuya('color','&h='+h+'&s=1000&v=900')};
+  window.setBrightness=function(v){document.getElementById('brightValue').innerHTML=Math.round(Number(v)/10)+'%';window.sendTuya('brightness','&value='+v)};
   function show(t){var f=document.getElementById('feedback');f.innerHTML=t;f.className='feedback show';setTimeout(function(){f.className='feedback'},1800)}
   setTimeout(function(){location.reload(true)},6*60*60*1000);
 })();
