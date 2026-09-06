@@ -14,129 +14,34 @@ html,body{
   overflow:hidden;
 }
 *{box-sizing:border-box}
-#wrap{
-  width:100%;height:100%;padding:14px;
-  background:#F4F0E8;
-}
-.card{
-  background:#FBF8F2;
-  border:1px solid #DDD2C2;
-  border-radius:16px;
-}
-#top{
-  height:31%;
-  display:table;
-  width:100%;
-  padding:0 10px;
-}
+#wrap{width:100%;height:100%;padding:14px;background:#F4F0E8}
+.card{background:#FBF8F2;border:1px solid #DDD2C2;border-radius:16px}
+#top{height:31%;display:table;width:100%;padding:0 10px}
 #clockbox,#datebox{display:table-cell;vertical-align:middle}
 #clockbox{width:58%;padding-left:14px}
-#greeting{
-  font-size:22px;
-  color:#85776D;
-  margin-bottom:6px;
-}
-#clock{
-  font-size:78px;
-  font-weight:300;
-  line-height:1;
-  color:#7A5B45;
-}
-#place{
-  font-size:22px;
-  margin-top:10px;
-  color:#85776D;
-}
-#datebox{
-  text-align:right;
-  padding-right:14px;
-}
-#day{
-  font-size:32px;
-  color:#715845;
-}
-#date{
-  font-size:21px;
-  color:#8E8073;
-  margin-top:8px;
-}
-#weather{
-  font-size:25px;
-  margin-top:16px;
-  color:#596A56;
-}
-#middle{
-  height:51%;
-  display:table;
-  width:100%;
-  margin-top:12px;
-  border-spacing:12px 0;
-}
-.col{
-  display:table-cell;
-  width:50%;
-  vertical-align:top;
-}
-.panel{
-  height:100%;
-  padding:18px;
-}
-h2{
-  font-size:23px;
-  font-weight:600;
-  margin:0 0 14px 0;
-  color:#7A5B45;
-}
-.item{
-  font-size:19px;
-  line-height:1.42;
-  margin:9px 0;
-  color:#5B4A3E;
-}
+#greeting{font-size:22px;color:#85776D;margin-bottom:6px}
+#clock{font-size:78px;font-weight:300;line-height:1;color:#7A5B45}
+#place{font-size:22px;margin-top:10px;color:#85776D}
+#datebox{text-align:right;padding-right:14px}
+#day{font-size:32px;color:#715845}
+#date{font-size:21px;color:#8E8073;margin-top:8px}
+#weather{font-size:26px;margin-top:14px;color:#596A56}
+#weatherExtra{font-size:14px;color:#9A8D80;margin-top:5px}
+#middle{height:51%;display:table;width:100%;margin-top:12px;border-spacing:12px 0}
+.col{display:table-cell;width:50%;vertical-align:top}
+.panel{height:100%;padding:18px}
+h2{font-size:23px;font-weight:600;margin:0 0 14px 0;color:#7A5B45}
+.item{font-size:19px;line-height:1.38;margin:8px 0;color:#5B4A3E}
 .muted{color:#9A8D80}
 .strong{font-weight:600}
-.divider{
-  height:1px;
-  background:#E7DCCD;
-  margin:12px 0;
-}
-#bottom{
-  height:14%;
-  display:table;
-  width:100%;
-  table-layout:fixed;
-  margin-top:12px;
-  border-spacing:8px 0;
-}
-.btn{
-  display:table-cell;
-  text-align:center;
-  vertical-align:middle;
-  font-size:17px;
-  background:#E3D1B8;
-  border:1px solid #D0B592;
-  border-radius:14px;
-  color:#5B4A3E;
-}
-.icon{
-  font-size:28px;
-  display:block;
-  margin-bottom:5px;
-}
-.small{
-  font-size:14px;
-  color:#9A8D80;
-}
-.badge{
-  display:inline-block;
-  padding:3px 8px;
-  font-size:13px;
-  border-radius:999px;
-  background:#EFE4D6;
-  color:#7A5B45;
-  margin-left:6px;
-  vertical-align:middle;
-}
+.time{display:inline-block;min-width:58px;font-weight:600;color:#7A5B45}
+.divider{height:1px;background:#E7DCCD;margin:12px 0}
+#bottom{height:14%;display:table;width:100%;table-layout:fixed;margin-top:12px;border-spacing:8px 0}
+.btn{display:table-cell;text-align:center;vertical-align:middle;font-size:17px;background:#E3D1B8;border:1px solid #D0B592;border-radius:14px;color:#5B4A3E}
+.icon{font-size:28px;display:block;margin-bottom:5px}
+.small{font-size:14px;color:#9A8D80}
+.badge{display:inline-block;padding:3px 8px;font-size:13px;border-radius:999px;background:#EFE4D6;color:#7A5B45;margin-left:6px;vertical-align:middle}
+.status{font-size:13px;color:#9A8D80;margin-top:10px}
 </style>
 </head>
 <body>
@@ -150,20 +55,20 @@ h2{
     <div id="datebox">
       <div id="day">Domingo</div>
       <div id="date">6 de setembro de 2026</div>
-      <div id="weather">🏡 painel de cozinha familiar</div>
-      <div class="small">clima online pode entrar na próxima etapa</div>
+      <div id="weather">🌤️ <span id="temp">--°C</span></div>
+      <div id="weatherExtra">Carregando tempo...</div>
     </div>
   </div>
 
   <div id="middle">
     <div class="col">
       <div class="panel card">
-        <h2>📅 HOJE <span class="badge" id="todayName">Domingo</span></h2>
+        <h2>📅 HOJE <span class="badge" id="todayName">Hoje</span></h2>
         <div id="todayList">
-          <div class="item muted">Carregando agenda do dia...</div>
+          <div class="item muted">Agenda Renato entra na próxima etapa.</div>
         </div>
         <div class="divider"></div>
-        <div class="item strong">Lembrete da semana</div>
+        <div class="item strong">Próximos compromissos fixos</div>
         <div class="item">• Segunda 16:00 — Sempre é Tempo</div>
         <div class="item">• Segunda 19:30 — Grupo Família</div>
         <div class="item">• Quinta 19:15 — EducaE</div>
@@ -172,15 +77,11 @@ h2{
 
     <div class="col">
       <div class="panel card">
-        <h2>✅ TAREFAS PRIORITÁRIAS</h2>
-        <div class="item">☐ Instruir Luiz para acessar o portal</div>
-        <div class="item">☐ Cartaz para venda de bolsas da Marlene</div>
-        <div class="item">☐ Gerar roteiro Soltanieh do Tezoli</div>
-        <div class="item">☐ Enviar PowerPoint EducaE aos responsáveis</div>
-        <div class="item">☐ Verificar peso, glicemia e pressão arterial</div>
-        <div class="item">☐ Estudo de meditação</div>
-        <div class="divider"></div>
-        <div class="small">Versão leve para iPad mini antigo</div>
+        <h2>✅ TODOIST <span class="badge">automático</span></h2>
+        <div id="todoistList">
+          <div class="item muted">Carregando tarefas...</div>
+        </div>
+        <div id="todoistStatus" class="status"></div>
       </div>
     </div>
   </div>
@@ -199,70 +100,99 @@ h2{
   var days=["Domingo","Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado"];
   var months=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
 
-  var agenda = {
-    0: [
-      "• Noite — revisar e criar metas semanais",
-      "• Organizar a semana da casa e dos compromissos",
-      "• Tempo livre com a família"
-    ],
-    1: [
-      "• 16:00 — Sempre é Tempo",
-      "• 19:30 — Grupo Família",
-      "• Separar materiais do dia"
-    ],
-    2: [
-      "• 19:30 — Curso de Mitras",
-      "• Rever pendências e mensagens"
-    ],
-    3: [
-      "• 19:30–21:30 — Estudo com Paramakirti",
-      "• Preparar materiais com antecedência"
-    ],
-    4: [
-      "• 19:15 — EducaE",
-      "• Conferir o PowerPoint do encontro"
-    ],
-    5: [
-      "• Manhã — estudo de meditação",
-      "• Manhã — verificar peso, glicemia e pressão arterial",
-      "• Enviar PowerPoint EducaE aos responsáveis"
-    ],
-    6: [
-      "• Sem compromisso fixo cadastrado",
-      "• Bom dia para cuidar da casa e descansar"
-    ]
-  };
-
-  function pad(n){ return n<10 ? "0"+n : n; }
-
-  function greeting(hour){
-    if(hour < 12) return "Bom dia, Renato e Kelly";
-    if(hour < 18) return "Boa tarde, Renato e Kelly";
-    return "Boa noite, Renato e Kelly";
-  }
-
-  function renderToday(d){
-    var list = document.getElementById("todayList");
-    var items = agenda[d.getDay()] || ["• Sem compromissos para hoje"];
-    var html = "";
-    for(var i=0;i<items.length;i++){
-      html += '<div class="item">'+items[i]+'</div>';
-    }
-    list.innerHTML = html;
-    document.getElementById("todayName").innerHTML = days[d.getDay()];
-  }
-
+  function pad(n){return n<10?"0"+n:n;}
+  function greeting(h){if(h<12)return "Bom dia, Renato e Kelly";if(h<18)return "Boa tarde, Renato e Kelly";return "Boa noite, Renato e Kelly";}
   function tick(){
-    var d = new Date();
-    document.getElementById("clock").innerHTML = pad(d.getHours()) + ":" + pad(d.getMinutes());
-    document.getElementById("day").innerHTML = days[d.getDay()];
-    document.getElementById("date").innerHTML = d.getDate() + " de " + months[d.getMonth()] + " de " + d.getFullYear();
-    document.getElementById("greeting").innerHTML = greeting(d.getHours());
-    renderToday(d);
+    var d=new Date();
+    document.getElementById("clock").innerHTML=pad(d.getHours())+":"+pad(d.getMinutes());
+    document.getElementById("day").innerHTML=days[d.getDay()];
+    document.getElementById("todayName").innerHTML=days[d.getDay()];
+    document.getElementById("date").innerHTML=d.getDate()+" de "+months[d.getMonth()]+" de "+d.getFullYear();
+    document.getElementById("greeting").innerHTML=greeting(d.getHours());
   }
-
   tick();
   setInterval(tick,1000);
+
+  function weatherText(code){
+    if(code===0)return ["☀️","Céu limpo"];
+    if(code===1||code===2)return ["🌤️","Poucas nuvens"];
+    if(code===3)return ["☁️","Nublado"];
+    if(code===45||code===48)return ["🌫️","Neblina"];
+    if(code>=51&&code<=57)return ["🌦️","Garoa"];
+    if(code>=61&&code<=67)return ["🌧️","Chuva"];
+    if(code>=80&&code<=82)return ["🌧️","Pancadas de chuva"];
+    if(code>=95)return ["⛈️","Trovoadas"];
+    return ["🌤️","Tempo em Votorantim"];
+  }
+
+  function loadWeather(){
+    var xhr=new XMLHttpRequest();
+    var url="https://api.open-meteo.com/v1/forecast?latitude=-23.54&longitude=-47.45&current_weather=true&timezone=America%2FSao_Paulo&_="+new Date().getTime();
+    xhr.onreadystatechange=function(){
+      if(xhr.readyState===4){
+        if(xhr.status>=200&&xhr.status<300){
+          try{
+            var data=JSON.parse(xhr.responseText);
+            var w=data.current_weather;
+            var desc=weatherText(Number(w.weathercode));
+            document.getElementById("weather").innerHTML=desc[0]+" <span id=\"temp\">"+Math.round(w.temperature)+"°C</span>";
+            document.getElementById("weatherExtra").innerHTML=desc[1]+" · vento "+Math.round(w.windspeed)+" km/h";
+          }catch(e){
+            document.getElementById("weatherExtra").innerHTML="Tempo indisponível";
+          }
+        } else {
+          document.getElementById("weatherExtra").innerHTML="Sem atualização do tempo";
+        }
+      }
+    };
+    xhr.open("GET",url,true);
+    xhr.send();
+  }
+  loadWeather();
+  setInterval(loadWeather,10*60*1000);
+
+  window.todoistCallback=function(data){
+    var box=document.getElementById("todoistList");
+    var status=document.getElementById("todoistStatus");
+    var tarefas=(data&&data.tarefas)?data.tarefas:[];
+    if(!tarefas.length){
+      box.innerHTML='<div class="item muted">Nenhuma tarefa nos próximos dias.</div>';
+    } else {
+      var html="";
+      for(var i=0;i<tarefas.length&&i<6;i++){
+        var t=tarefas[i];
+        var d=t.inicio?new Date(t.inicio):null;
+        var quando="";
+        if(d&&!isNaN(d.getTime())){
+          quando=pad(d.getDate())+"/"+pad(d.getMonth()+1);
+          if(d.getHours()!==0||d.getMinutes()!==0)quando+=" "+pad(d.getHours())+":"+pad(d.getMinutes());
+        }
+        html+='<div class="item">'+(quando?'<span class="time">'+quando+'</span> ':'')+'☐ '+escapeHtml(t.titulo||"Tarefa")+'</div>';
+      }
+      box.innerHTML=html;
+    }
+    status.innerHTML="Atualizado automaticamente";
+  };
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  function loadTodoist(){
+    var old=document.getElementById("todoistJsonp");
+    if(old&&old.parentNode)old.parentNode.removeChild(old);
+    var s=document.createElement("script");
+    s.id="todoistJsonp";
+    s.src="https://script.google.com/macros/s/AKfycbzKhDTHTy-wGRvU4CqYcejwgSn8-eSCZFwqzO2hIQt7dCHQsxK4un_0VMlBRPe8msgtGA/exec?callback=todoistCallback&_="+new Date().getTime();
+    s.onerror=function(){
+      document.getElementById("todoistStatus").innerHTML="Não foi possível atualizar agora";
+    };
+    document.body.appendChild(s);
+  }
+  loadTodoist();
+  setInterval(loadTodoist,5*60*1000);
+
+  setTimeout(function(){location.reload(true);},60*60*1000);
 })();
 </script>
 </body>
